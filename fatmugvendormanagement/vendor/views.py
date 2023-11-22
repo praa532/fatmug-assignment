@@ -51,6 +51,48 @@ def vendor_detail_html(request, vendor_code):
     vendor = get_object_or_404(Vendor, pk=vendor_code)
     return render(request, 'vendor_detail.html', {'vendor': vendor})
 
+@api_view(['POST'])
+def create_purchase_order(request):
+    serializer = PurchaseOrderSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def list_purchase_orders(request):
+    vendor_id = request.query_params.get('vendor_id', None)
+    if vendor_id:
+        purchase_orders = PurchaseOrder.objects.filter(vendor__id=vendor_id)
+    else:
+        purchase_orders = PurchaseOrder.objects.all()
+
+    serializer = PurchaseOrderSerializer(purchase_orders, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def purchase_order_detail(request, po_id):
+    # Retrieve the purchase order
+    purchase_order = get_object_or_404(PurchaseOrder, pk=po_id)
+
+    if request.method == 'GET':
+        # Retrieve details of the purchase order
+        serializer = PurchaseOrderSerializer(purchase_order)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        # Update the purchase order
+        serializer = PurchaseOrderSerializer(purchase_order, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        # Delete the purchase order
+        purchase_order.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['GET'])
 def vendor_performance(request, vendor_id):
     vendor = get_object_or_404(Vendor, pk=vendor_id)
@@ -71,7 +113,7 @@ def vendor_performance(request, vendor_id):
         'fulfillment_rate': fulfillment_rate,
     })
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def acknowledge_purchase_order(request, po_id):
     purchase_order = get_object_or_404(PurchaseOrder, pk=po_id)
 
