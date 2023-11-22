@@ -1,0 +1,19 @@
+<!-- vendor_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendor List</title>
+</head>
+<body>
+    <h1>Vendor List</h1>
+    <ul>
+        {% for vendor in vendors %}
+            <li>
+                <a href="{% url 'vendor-detail' vendor.id %}">{{ vendor.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

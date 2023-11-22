@@ -1,0 +1,20 @@
+<!-- purchase_order_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Order List</title>
+</head>
+<body>
+    <h1>Purchase Order List</h1>
+    <ul>
+        {% for po in purchase_orders %}
+            <li>
+                <a href="{% url 'purchase-order-detail' po.id %}">{{ po.po_number }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+ 

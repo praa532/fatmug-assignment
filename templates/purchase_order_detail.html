@@ -1,0 +1,16 @@
+<!-- purchase_order_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ po.po_number }} Details</title>
+</head>
+<body>
+    <h1>{{ po.po_number }} Details</h1>
+    <p>Vendor: {{ po.vendor.name }}</p>
+    <p>Order Date: {{ po.order_date }}</p>
+    <p>Status: {{ po.status }}</p>
+    <!-- Display other purchase order details -->
+</body>
+</html>
