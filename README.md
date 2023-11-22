@@ -12,7 +12,6 @@ This project is a Vendor Management System implemented using Django and Django R
 - [Data Models](#data-models)
 - [HTML Pages](#html-pages)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -148,7 +147,3 @@ The application should now be accessible at http://localhost:8000/.
 3. Commit your changes: `git commit -m 'Add a new feature'`.
 4. Push to the branch: `git push origin feature-name`.
 5. Submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
