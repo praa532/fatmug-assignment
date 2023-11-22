@@ -115,6 +115,10 @@ The application should now be accessible at http://localhost:8000/.
      - average_response_time: FloatField
      - fulfillment_rate: FloatField
 
+![Alt text](<Screenshot 2023-11-22 174136.png>)
+
+![Alt text](<Screenshot 2023-11-22 174201.png>)
+
 2. **Purchase Order (PO) Model:**
    - Fields:
      - po_number: CharField

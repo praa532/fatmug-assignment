@@ -8,7 +8,15 @@ from rest_framework import status
 from rest_framework import generics
 from .models import Vendor, PurchaseOrder, HistoricalPerformance
 from .serializers import VendorSerializer, PurchaseOrderSerializer, HistoricalPerformanceSerializer
+from drf_yasg.utils import swagger_auto_schema
 
+@swagger_auto_schema(
+    methods=['POST'],
+    request_body=VendorSerializer,  # Assuming VendorSerializer is your serializer
+    responses={200: VendorSerializer(many=True), 201: VendorSerializer(), 400: 'Bad Request'},
+    operation_summary='Create a new vendor or get a list of vendors',
+    operation_description='Use this endpoint to create a new vendor or get a list of all vendors.',
+)
 
 @api_view(['POST', 'GET'])
 def vendor_list_create(request):
